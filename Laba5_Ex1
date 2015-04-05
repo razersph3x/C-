@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random x = new Random();
+            int[] chislo = new int[15];
+            Console.WriteLine("Массив:");
+            for (int i = 0; i <= 14; i++)
+            {
+                chislo[i] = Convert.ToInt32(x.Next(-50, 50));
+                if (i < 9) Console.WriteLine("0{0}:  {1}", i + 1, chislo[i]);
+                else Console.WriteLine("{0}:  {1}", i + 1, chislo[i]);
+            }
+            int A = neminus(chislo);
+            Console.WriteLine("Колличество неотрицательных чисел: {0}", A);
+            int B = summminus(chislo);
+            Console.WriteLine("Сумма отрицательных чисел: {0}", B);
+            int C = min(chislo);
+            Console.WriteLine("Номер минимального отриц. числа: {0}", C);
+            Console.WriteLine();
+            nechetelem(chislo);
+            Console.ReadLine();
+        }
+        static int neminus(int[] array)
+        {
+            int x = 0;
+            for (int n = 0; n <= 14; n++)
+            {
+                if (array[n] >= 0) x = x + 1;
+            }
+            return x;
+        }
+        static int summminus(int[] array)
+        {
+            int x = 0;
+            for (int n = 0; n <= 14; n++)
+            {
+                if (array[n] < 0) x = x + array[n];
+            }
+            return x;
+        }
+        static int min(int[] array)
+        {
+            int x = 0;
+            for (int n = 0; n <= 14; n++)
+            {
+                if (array[n] < x) x = array[n];
+            }
+            return x;
+        }
+        static void nechetelem(int[] array)
+        {
+            for (int n = 0; n <= 14; n++)
+            {
+                if ((n - 1) % 2 != 0) Console.WriteLine("{0} Элемент: {1}", n + 1, array[n]); ;
+            }
+        }
+    }
+}
