@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите строку:");
+            string str = Convert.ToString(Console.ReadLine());
+            string[] a = str.Split(' ');
+            string max = string.Empty;
+            foreach (string s in a)
+                if (max.Length < s.Length)
+                    max = s;
+            Console.WriteLine("Самое длинное слово: {0}, его длинна = {1}", max, max.Length);
+            Console.ReadLine();
+        }
+    }
+}
