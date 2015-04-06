@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab_5._4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите размер массива(Строку,стольбец): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int m = Convert.ToInt32(Console.ReadLine());
+            int[,] a = new int[n, m];
+            zap(a, n, m);
+            write(a, m);
+            max(a, n, m);
+        }
+        //Заполнение
+        static void zap(int[,] a, int n, int m)
+        {
+            Random x = new Random();
+            for (int i = 0; i < n; ++i)
+            {
+                for (int j = 0; j < m; ++j)
+                {
+                    a[i, j] = x.Next(1, 100);
+                }
+
+            }
+        }
+
+        //Вывод массива
+        static void write(int[,] arr, int m)
+        {
+            int k = 0;
+            foreach (int elem in arr)
+            {
+                Console.Write("{0,3} ", elem);
+                ++k;
+                if (k == m)
+                {
+                    Console.WriteLine();
+                    k = 0;
+                }
+            }
+        }
+        //Макс в столбце
+        static void max(int[,] a, int n, int m)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                int maxmum = a[0, j];
+                for (int i = 0; i < n; ++i)
+                {
+                    if (a[i, j] > maxmum) maxmum = a[i, j];
+                }
+                Console.WriteLine("Максимальное число{0}: {1}", j + 1, maxmum);
+            }
+        }
+    }
+}
+  
+
