@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[][,] a = new int[][,] 
+            {
+                new int[2,2],
+                new int[3,2],
+                new int[2,3] 
+            };
+            int sum = 0;
+            Console.WriteLine("Первый массив: ");
+            form(a[0], 2, 2);
+            write(a[0], 2);
+
+            sum = sum + min(a[0], 2, 2);
+            Console.WriteLine("Второй массив: ");
+            form(a[1], 3, 2);
+            write(a[1], 2);
+            sum = sum + min(a[1], 3, 2);
+            Console.WriteLine("Третий массив: ");
+            form(a[2], 2, 3);
+            write(a[2], 3);
+
+            sum = sum + min(a[2], 2, 3);
+            Console.WriteLine("Сумма минимальных: {0}", sum);
+            Console.ReadLine();
+        }
+        static int min(int[,] a, int n, int m)
+        {
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                int min = a[i, 0];
+                for (int j = 0; j < m; j++)                    
+                {
+                    if (a[i, j] < min)
+                    {
+                        min = a[i, j];
+                    }
+                }
+                Console.Write("Минимальный в строке = ");
+                Console.Write(min);
+                Console.ReadLine();
+                
+                sum = sum + min;
+            }
+            Console.WriteLine();
+            return sum;
+        }
+        static void form(int[,] a, int n, int m)
+        {
+            Random x = new Random();
+            for (int i = 0; i < n; ++i)
+            {
+                for (int j = 0; j < m; ++j)
+                {
+                    a[i, j] = x.Next(1, 10);
+                }
+
+            }
+        }
+        //Вывод матрицей
+        static void write(int[,] arr, int m)
+        {
+            int k = 0;
+            foreach (int elem in arr)
+            {
+                Console.Write("{0,3} ", elem);
+                ++k;
+                if (k == m)
+                {
+                    Console.WriteLine();
+                    k = 0;
+                }
+            }
+        }
+    }
+}
