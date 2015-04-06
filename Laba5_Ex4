@@ -17,6 +17,9 @@ namespace Nikson
             zap(a, n, m);
             write(a, m);
             max(a, n, m);
+            double sred = sr(a, n, m);
+            Console.WriteLine("Среднее значение: {0}", sred);
+            Console.ReadLine();
         }
         //Заполнение
         static void zap(int[,] a, int n, int m)
@@ -60,7 +63,30 @@ namespace Nikson
                 Console.WriteLine("Максимальное число{0}: {1}", j + 1, maxmum);
             }
         }
+        static double sr(int[,] a, int n, int m)
+        {
+            int min = a[0, 0];
+            int max = a[0, 0];
+            foreach (int elem in a)
+            {
+                if (elem < min) min = elem;
+                if (elem > max) max = elem;
+            }
+            int sum = 0;
+            int ink = 0;
+            foreach (int elem in a)
+            {
+                if (elem != max && elem != min)
+                {
+                    sum += elem;
+                    ++ink;
+                }
+            }
+            double sr = sum / ink;
+            return sr;
+        }
     }
 }
+
   
 
