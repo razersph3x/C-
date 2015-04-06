@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            Random x = new Random();
+            int swt = 0;
+            StringBuilder s = new StringBuilder();
+            Console.Write("Введите длину строки : "); int l = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < l; ++i)
+            {
+                swt = x.Next(1, 4);
+                if (swt == 1) s.Append(Convert.ToChar(rand.Next(0x0069, 0x0077)));
+                if (swt == 2) s.Append(Convert.ToChar(rand.Next(0x0034, 0x0037)));
+                if (swt == 3)
+                {
+                    swt = x.Next(1, 4);
+                    if (swt == 1) s.Append("?");
+                    if (swt == 2) s.Append("!");
+                    if (swt == 3) s.Append(";");
+                }
+            }
+            Console.WriteLine("Исходная строка:");
+            Console.WriteLine(s.ToString());
+            for (int i = 0; i < l; ++i)
+            {
+                if (s[i] == '!') s[i] = '_';
+            }
+            Console.WriteLine("Итоговая строка:");
+            Console.WriteLine(s.ToString());
+            Console.ReadLine();
+        }
+    }
+}
