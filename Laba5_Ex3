@@ -18,7 +18,7 @@ namespace ConsoleApplication1
 
             }
         }
-        static void WriteMs(int[] MASS, int N)
+        static void Vvod(int[] MASS, int N)
         {
             Console.WriteLine("Начальный массив: ");
             for (int i = 0; i < N; i++)
@@ -51,7 +51,7 @@ namespace ConsoleApplication1
             int N = Convert.ToInt32(Console.ReadLine());
             int[] MASS = new int[N];
             Construct(ref MASS, N);
-            WriteMs(MASS, N);
+            Vvod(MASS, N);
             Changes(MASS, N);
             Console.ReadKey();
         }
