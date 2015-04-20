@@ -1,48 +1,59 @@
-static void Construct(ref int[] MASS, int N)
-{
-Random r = new Random();
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-for (int i = 0; i < N; i++)
+namespace ConsoleApplication1
 {
+    class Program
+    {
+        static void Construct(ref int[] MASS, int N)
+        {
+            Random r = new Random();
 
-MASS[i] = r.Next(1, 9);
+            for (int i = 0; i < N; i++)
+            {
 
-}
-}
-static void WriteMs(int[] MASS, int N)
-{
-Console.WriteLine("Начальный массив:");
-for (int i = 0; i < N; i++)
-{
+                MASS[i] = r.Next(1, 9);
 
-Console.Write(MASS[i]+" ");
+            }
+        }
+        static void WriteMs(int[] MASS, int N)
+        {
+            Console.WriteLine("Начальный массив: ");
+            for (int i = 0; i < N; i++)
+            {
 
-}
+                Console.Write(MASS[i] + " ");
 
-}
-static void Changes(int[] MASS, int N)
-{
-int k;
-Console.WriteLine("Кол-во чисел");
-for (int i = 0; i < 9; i++)
-{
-k = 0;
-foreach (int x in MASS)
-{
-if (x == (i + 1)) k=k+1;
-}
-Console.Write(k+" ");
-}
-}
-static void Main(string[] args)
-{
+            }
+            Console.ReadLine();
 
-Console.WriteLine("Введите значения N: ");
+        }
+        static void Changes(int[] MASS, int N)
+        {
+            int k;
+            Console.WriteLine("Кол-во чисел: ");
+            for (int i = 0; i < 9; i++)
+            {
+                k = 0;
+                foreach (int x in MASS)
+                {
+                    if (x == (i + 1)) k = k + 1;
+                }
+                Console.Write(k + " ");
+            }
+        }
+        static void Main(string[] args)
+        {
 
-int N=Convert.ToInt32(Console.ReadLine());
-int[] MASS = new int[N];
-Construct(ref MASS, N);
-WriteMs(MASS, N);
-Changes(MASS, N);
-Console.ReadKey();
+            Console.WriteLine("Размер массива: ");
+            int N = Convert.ToInt32(Console.ReadLine());
+            int[] MASS = new int[N];
+            Construct(ref MASS, N);
+            WriteMs(MASS, N);
+            Changes(MASS, N);
+            Console.ReadKey();
+        }
+    }
 }
