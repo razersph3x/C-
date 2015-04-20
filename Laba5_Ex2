@@ -1,0 +1,48 @@
+static void Construct(ref int[] MASS, int N)
+{
+Random r = new Random();
+
+for (int i = 0; i < N; i++)
+{
+
+MASS[i] = r.Next(1, 9);
+
+}
+}
+static void WriteMs(int[] MASS, int N)
+{
+Console.WriteLine(" массив:");
+for (int i = 0; i < N; i++)
+{
+
+Console.Write(MASS[i]+" ");
+
+}
+
+
+}
+static void Changes(ref int[] MASS, int N)
+{
+int k=MASS[N-1];
+Console.WriteLine("С изменениями");
+for (int i = N-1; i >=1; i--)
+{
+
+MASS[i]=MASS[i-1];
+}
+MASS[0] = k;
+
+}
+static void Main(string[] args)
+{
+
+Console.WriteLine("Введите значения N: ");
+
+int N=Convert.ToInt32(Console.ReadLine());
+int[] MASS = new int[N];
+Construct(ref MASS, N);
+WriteMs(MASS, N);
+Changes(ref MASS, N);
+WriteMs(MASS, N);
+Console.ReadKey();
+}
