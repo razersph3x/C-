@@ -1,0 +1,182 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson
+{
+
+    class TimeIn24Form
+    {
+        int hours;
+        int min;
+        int sec;
+        public TimeIn24Form()
+        {
+            hours = 0;
+            min = 0;
+            sec = 0;
+        }
+        public TimeIn24Form(int hours, int min, int sec)
+        {
+            this.hours = hours;
+            this.min = min;
+            this.sec = sec;
+        }
+        public void setHours()
+        {
+            try
+            {
+                int chislo;
+                Console.Write("Часы: ");
+                chislo = Convert.ToInt32(Console.ReadLine());
+                if ((chislo < 0) || (chislo > 24)) throw new SystemException();
+                else
+                {
+                    this.hours = chislo;
+                }
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.setHours();
+            }
+        }
+
+        public void setMin()
+        {
+            try
+            {
+                int chislo;
+                Console.Write("Минуты: ");
+                chislo = Convert.ToInt32(Console.ReadLine());
+                if ((chislo < 0) || (chislo > 60)) throw new SystemException();
+                else
+                {
+                    this.min = chislo;
+                }
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.setMin();
+            }
+        }
+
+        public void setSec()
+        {
+            try
+            {
+                int chislo;
+                Console.Write("Секунды: ");
+                chislo = Convert.ToInt32(Console.ReadLine());
+                if ((chislo < 0) || (chislo > 60)) throw new SystemException();
+                else
+                {
+                    this.sec = chislo;
+                }
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.setSec();
+            }
+        }
+
+        public int getHours()
+        {
+            return this.hours;
+        }
+        public int getMin()
+        {
+            return this.min;
+        }
+        public int getSec()
+        {
+            return this.sec;
+        }
+        public void Vivod()
+        {
+            Console.WriteLine("{0:00}:{1:00}.{2:00}", this.getHours(), this.getMin(), this.getSec());
+        }
+
+
+        public void IzmHours()
+        {
+            try
+            {
+                Console.Write("Изменить часы на: ");
+                int izm = Convert.ToInt32(Console.ReadLine());
+                if ((this.getHours() + izm < 0) || (this.getHours() + izm > 24)) throw new SystemException();
+                else this.hours += izm;
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.IzmHours();
+            }
+
+        }
+
+        public void IzmMin()
+        {
+            try
+            {
+                Console.Write("Изменить минуты на: ");
+                int izm = Convert.ToInt32(Console.ReadLine());
+                if ((this.min + izm < 0) || (this.min + izm > 60)) throw new SystemException();
+                else this.min += izm;
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.IzmMin();
+            }
+
+        }
+
+        public void IzmSec()
+        {
+            try
+            {
+                Console.Write("Изменить секунды на: ");
+                int izm = Convert.ToInt32(Console.ReadLine());
+                if ((this.sec + izm < 0) || (this.sec + izm > 60)) throw new SystemException();
+                else this.sec += izm;
+            }
+            catch (SystemException)
+            {
+                Console.WriteLine("Ошибочный ввод");
+                this.IzmSec();
+            }
+
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            TimeIn24Form time = new TimeIn24Form();
+            time.Vivod();
+            time = new TimeIn24Form(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            time.Vivod();
+            time.setHours();
+            time.Vivod();
+            time.setMin();
+            time.Vivod();
+            time.setSec();
+            time.Vivod();
+
+            time.IzmHours();
+            time.Vivod();
+            time.IzmMin();
+            time.Vivod();
+            time.IzmSec();
+            time.Vivod();
+
+            Console.ReadKey();
+        }
+    }
+}
