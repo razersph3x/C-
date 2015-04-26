@@ -1,0 +1,115 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nikson 6_3
+{
+    class BallStud
+    {
+        string NameStud;
+        int BallMath;
+        int BallFizik;
+        int BallInf;
+        double SredBall;
+
+        public string getNameStud()
+        {
+            return this.NameStud;
+        }
+        public void setNameStud(string NameStud)
+        {
+            this.NameStud = NameStud;
+        }
+        public int getBallMath()
+        {
+            return this.BallMath;
+        }
+        public void setBallMath(int BallMath)
+        {
+            this.BallMath = BallMath;
+        }
+        public int getBallFizik()
+        {
+            return this.BallFizik;
+        }
+        public void setBallFizik(int BallFizik)
+        {
+            this.BallFizik = BallFizik;
+        }
+        public int getBallInf()
+        {
+            return this.BallInf;
+        }
+        public void setBallInf(int BallInf)
+        {
+            this.BallInf = BallInf;
+        }
+        public double getSredBall()
+        {
+            return this.SredBall;
+        }
+        public void setSredBall(double SredBall)
+        {
+            this.SredBall = SredBall;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] buffer = System.IO.File.ReadAllLines("Список студентов.txt");
+            int kolich = Convert.ToInt32(buffer[0]);
+            BallStud[] SpisStud = new BallStud[buffer.Length - 1];
+
+            double BallMath = 0;
+            double BallFizik = 0;
+            double BallInf = 0;
+            double maxBall = 0;
+            for (int i = 0; i < SpisStud.Length; i++)
+            {
+                SpisStud[i] = new BallStud();
+            }
+            for (int i = 0; i < SpisStud.Length; i++)
+            {
+                int schet = 0;
+                for (int j = 0; j < buffer[i + 1].Length; j++)
+                {
+                    if ((buffer[i + 1][j] == ' ') && (schet == 0))
+                    {
+                        schet++;
+
+                    }
+                    else if ((buffer[i + 1][j] == ' ') && (schet == 1))
+                    {
+                        schet++;
+                        SpisStud[i].setNameStud(buffer[i + 1].Substring(0, j));
+                    }
+                    else if ((buffer[i + 1][j] == ' ') && (schet == 2))
+                    {
+                        SpisStud[i].setBallMath(Convert.ToInt32(buffer[i + 1].Substring(SpisStud[i].getNameStud().Length + 1, 1)));
+                        SpisStud[i].setBallFizik(Convert.ToInt32(buffer[i + 1].Substring(SpisStud[i].getNameStud().Length + 3, 1)));
+                        SpisStud[i].setBallInf(Convert.ToInt32(buffer[i + 1].Substring(SpisStud[i].getNameStud().Length + 5, 1)));
+                    }
+                }
+                SpisStud[i].setSredBall((double)(SpisStud[i].getBallMath() + SpisStud[i].getBallFizik() + SpisStud[i].getBallInf()) / 3);
+                if (SpisStud[i].getSredBall() > maxBall) maxBall = SpisStud[i].getSredBall();
+                BallMath += (double)SpisStud[i].getBallMath();
+                BallFizik += (double)SpisStud[i].getBallFizik();
+                BallInf += (double)SpisStud[i].getBallInf();
+            }
+            BallMath /= (double)kolich;
+            BallFizik /= (double)kolich;
+            BallInf /= (double)kolich;
+            using (FileStream fs = File.Create("out.txt")) ;
+            System.IO.File.AppendAllText("out.txt", ("Средний балл по математике: " + BallMath + "\nСредний балл по физике: " + BallFizik + "\nСредний балл по информатике: " + BallInf + "\n"), Encoding.UTF8);
+            System.IO.File.AppendAllText("out.txt", ("Максимальный средний балл набрал(и) следующий(ие) студент(ы):\n"), Encoding.UTF8);
+            for (int i = 0; i < SpisStud.Length; i++)
+            {
+                if (SpisStud[i].getSredBall() == maxBall) System.IO.File.AppendAllText("out.txt", (SpisStud[i].getNameStud() + "\n"), Encoding.UTF8);
+            }
+        }
+    }
+}
