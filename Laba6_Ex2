@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _6._2
+namespace Nik
 {
     class Book //Класс книги
     {
@@ -60,7 +60,6 @@ namespace _6._2
                 title[t].en = kniga.prikl;
                 title[y] = new Book("Дюна");
                 title[y].en = kniga.fant;
-
                 Titles(title, n);
 
                 Console.ReadKey();
@@ -74,10 +73,10 @@ namespace _6._2
                 for (int j = 0; j < n; j++)
                 {
                     int i = 0;
-                    Console.Write("\nttle {0}: ", j + 1);
-                    while (i < 3)
+                    Console.Write("\n ttle {0}: ", j + 1);
+                    while (i < 2)
                     {
-                        int x = r.Next(0, 6);
+                        int x = r.Next(0,6);
                         if (k[x] == x) continue;
                         title[x].analysis();
                         k[x] = x;
